@@ -448,15 +448,53 @@ export default function Thread() {
         <div style={{
           flex: 1, display: "flex", flexDirection: "column",
           alignItems: "center", justifyContent: "center",
-          gap: 48, padding: "0 40px", textAlign: "center", maxWidth: 320,
+          gap: 28, padding: "0 40px", textAlign: "center", maxWidth: 320,
         }}>
-          <div style={{ display: "flex", gap: 6 }}>
-            {[COLORS.green, COLORS.green, COLORS.yellow, COLORS.red, COLORS.green].map((c, i) => (
-              <div key={i} style={{ width: 24, height: 24, background: c, borderRadius: 3, opacity: 0.4 }} />
-            ))}
+          {/* Visual demo */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+            {/* Top demo grid */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 48px)", gap: 3 }}>
+              {[4, 7, 12, 1, 15, 9].map((sym, i) => {
+                const isMatch = sym === 12;
+                return (
+                  <div key={`dt${i}`} style={{
+                    width: 48, height: 48,
+                    background: isMatch ? COLORS.green : "transparent",
+                    border: isMatch ? "2px solid " + COLORS.green : "1px solid rgba(255,255,255,0.07)",
+                    borderRadius: 3,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    color: isMatch ? "#fff" : "rgba(255,255,255,0.18)",
+                  }}>
+                    <Shape index={sym} size={22} color="currentColor" />
+                  </div>
+                );
+              })}
+            </div>
+            {/* Connector arrow */}
+            <svg width="20" height="20" viewBox="0 0 20 20" style={{ opacity: 0.15 }}>
+              <path d="M10 2v12M5 10l5 5 5-5" stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            {/* Bottom demo grid */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 48px)", gap: 3 }}>
+              {[28, 3, 22, 12, 17, 26].map((sym, i) => {
+                const isMatch = sym === 12;
+                return (
+                  <div key={`db${i}`} style={{
+                    width: 48, height: 48,
+                    background: isMatch ? COLORS.green : "transparent",
+                    border: isMatch ? "2px solid " + COLORS.green : "1px solid rgba(255,255,255,0.07)",
+                    borderRadius: 3,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    color: isMatch ? "#fff" : "rgba(255,255,255,0.18)",
+                  }}>
+                    <Shape index={sym} size={22} color="currentColor" />
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <div style={{ fontSize: 12, lineHeight: 2.2, color: "rgba(255,255,255,0.25)" }}>
-            Two grids. One shared shape.<br />Five rounds. Be fast.
+          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", lineHeight: 1.8 }}>
+            Find the match. Five rounds.
           </div>
           <div
             role="button" tabIndex={0} onPointerDown={startGame}
